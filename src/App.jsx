@@ -220,8 +220,8 @@ export default function App() {
         </div>
         {view !== "select" && (
           <button onClick={() => { setView("select"); setEditingId(null); setDeleteConfirmId(null); setShowAddInput(false); }}
-            style={{ marginLeft:"auto", background:"#1e293b", border:"1px solid #334155", color:"#94a3b8", borderRadius:8, padding:"6px 12px", fontSize:13, cursor:"pointer" }}>
-            ← 홈
+            style={{ marginLeft:"auto", background:"linear-gradient(135deg,#f59e0b,#d97706)", border:"none", color:"#fff", borderRadius:10, padding:"10px 18px", fontSize:15, fontWeight:900, cursor:"pointer", boxShadow:"0 2px 12px rgba(245,158,11,0.4)" }}>
+            🏠 홈
           </button>
         )}
       </div>
