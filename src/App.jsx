@@ -473,24 +473,26 @@ export default function App() {
                       </div>
                       <div style={{ background:"#1e293b", borderRadius:16, padding:20 }}>
                         <div style={{ fontSize:13, fontWeight:700, color:"#94a3b8", marginBottom:16 }}>📊 시간대별 집중도</div>
-                        <div style={{ display:"flex", alignItems:"flex-end", gap:6, height:80 }}>
+                        <div style={{ overflowX:"auto", paddingBottom:4 }}>
+                        <div style={{ display:"flex", alignItems:"flex-end", gap:6, height:80, minWidth: `${TIME_SLOTS.filter(t => { const m=toMinutes(t); return m>=rangeStart-60&&m<=rangeEnd+60; }).length * 28}px` }}>
                           {TIME_SLOTS.filter(t => { const m=toMinutes(t); return m>=rangeStart-60&&m<=rangeEnd+60; }).map(t => {
                             const group=byTime[t]||[]; const count=group.length;
                             const maxCount=Math.max(...Object.values(byTime).map(g=>g.length),1);
                             const hPct=count>0?Math.max((count/maxCount)*100,15):0;
                             const hasConf=group.some(g=>g.schedule.status==="confirmed");
                             return (
-                              <div key={t} style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", gap:4 }}>
-                                {count>0&&<div style={{ fontSize:10, fontWeight:800, color: hasConf?"#34d399":"#fbbf24" }}>{count}명</div>}
+                              <div key={t} style={{ flex:"0 0 24px", display:"flex", flexDirection:"column", alignItems:"center", gap:4 }}>
+                                {count>0&&<div style={{ fontSize:10, fontWeight:800, color: hasConf?"#34d399":"#fbbf24", whiteSpace:"nowrap" }}>{count}명</div>}
                                 <div style={{ width:"100%", height:56, display:"flex", alignItems:"flex-end" }}>
                                   <div style={{ width:"100%", height: count>0?`${hPct}%`:"4px", borderRadius:"4px 4px 0 0", background: count===0?"#1a2540":hasConf?"linear-gradient(180deg,#34d399,#059669)":"linear-gradient(180deg,#fbbf24,#d97706)", boxShadow: count>0&&hasConf?"0 -2px 8px rgba(52,211,153,0.4)":count>0?"0 -2px 8px rgba(251,191,36,0.4)":"none" }} />
                                 </div>
-                                <div style={{ fontSize:9, color:"#334155", fontWeight:600, whiteSpace:"nowrap" }}>
-                                  {t.split(":")[1]==="00"?`${t.split(":")[0]}시`:t.split(":")[1]==="30"?"30분":""}
+                                <div style={{ fontSize:9, color:"#475569", fontWeight:600, whiteSpace:"nowrap" }}>
+                                  {t.split(":")[1]==="00"?`${t.split(":")[0]}시`:"·"}
                                 </div>
                               </div>
                             );
                           })}
+                        </div>
                         </div>
                         <div style={{ display:"flex", gap:14, marginTop:12 }}>
                           <div style={{ display:"flex", alignItems:"center", gap:6, fontSize:11, color:"#64748b" }}><div style={{ width:10, height:10, borderRadius:3, background:"linear-gradient(135deg,#34d399,#059669)" }} />확정</div>
