@@ -110,6 +110,7 @@ export default function App() {
 
   const [managerDate, setManagerDate] = useState(getToday());
   const [managerTab, setManagerTab] = useState("schedule");
+  const [calOpen, setCalOpen] = useState(false);
 
   // 기사 관리
   const [editingId, setEditingId] = useState(null);
@@ -359,23 +360,18 @@ export default function App() {
             {managerTab === "schedule" && (
               <div>
                 {/* 날짜 달력 */}
-                {(() => {
-                  const [calOpen, setCalOpen] = useState(false);
-                  return (
-                    <div style={{ marginBottom:16 }}>
-                      <button onClick={() => setCalOpen(v => !v)}
-                        style={{ width:"100%", background:"#1e293b", border:"1px solid #334155", color:"#f8fafc", borderRadius:12, padding:"12px 16px", fontSize:14, fontWeight:700, cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"space-between" }}>
-                        <span>📅 {formatDate(managerDate)}</span>
-                        <span style={{ color:"#64748b" }}>{calOpen?"▲":"▼"}</span>
-                      </button>
-                      {calOpen && (
-                        <div style={{ marginTop:8 }}>
-                          <MiniCalendar selectedDate={managerDate} onSelect={(d) => { setManagerDate(d); setCalOpen(false); }} schedules={{}} driverId={null} />
-                        </div>
-                      )}
+                <div style={{ marginBottom:16 }}>
+                  <button onClick={() => setCalOpen(v => !v)}
+                    style={{ width:"100%", background:"#1e293b", border:"1px solid #334155", color:"#f8fafc", borderRadius:12, padding:"12px 16px", fontSize:14, fontWeight:700, cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"space-between" }}>
+                    <span>📅 {formatDate(managerDate)}</span>
+                    <span style={{ color:"#64748b" }}>{calOpen?"▲":"▼"}</span>
+                  </button>
+                  {calOpen && (
+                    <div style={{ marginTop:8 }}>
+                      <MiniCalendar selectedDate={managerDate} onSelect={(d) => { setManagerDate(d); setCalOpen(false); }} schedules={{}} driverId={null} />
                     </div>
-                  );
-                })()}
+                  )}
+                </div>
 
                 {/* 통계 */}
                 <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:10, marginBottom:20 }}>
