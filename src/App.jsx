@@ -362,9 +362,9 @@ export default function App() {
                 {/* 날짜 달력 */}
                 <div style={{ marginBottom:16 }}>
                   <button onClick={() => setCalOpen(v => !v)}
-                    style={{ width:"100%", background:"#1e293b", border:"1px solid #334155", color:"#f8fafc", borderRadius:12, padding:"12px 16px", fontSize:14, fontWeight:700, cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"space-between" }}>
+                    style={{ width:"100%", background:"#1e293b", border:"1px solid #334155", color:"#f8fafc", borderRadius:12, padding:"14px 16px", fontSize:18, fontWeight:800, cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"space-between" }}>
                     <span>📅 {formatDate(managerDate)}</span>
-                    <span style={{ color:"#64748b" }}>{calOpen?"▲":"▼"}</span>
+                    <span style={{ color:"#64748b", fontSize:14 }}>{calOpen?"▲":"▼"}</span>
                   </button>
                   {calOpen && (
                     <div style={{ marginTop:8 }}>
