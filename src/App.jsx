@@ -438,37 +438,43 @@ export default function App() {
                     <div style={{ marginTop:24 }}>
                       <div style={{ background:"#1e293b", borderRadius:16, padding:20, marginBottom:14 }}>
                         <div style={{ fontSize:13, fontWeight:700, color:"#94a3b8", marginBottom:18 }}>📍 시간대별 기사 현황</div>
-                        <div style={{ position:"relative", marginBottom:8, paddingLeft:52 }}>
-                          <div style={{ position:"relative", height:20 }}>
-                            {ticks.map(m => {
-                              const pct=((m-rangeStart)/totalRange)*100;
-                              return <div key={m} style={{ position:"absolute", left:`${pct}%`, transform:"translateX(-50%)", fontSize:11, color:"#475569", fontWeight:600 }}>{Math.floor(m/60)}시</div>;
-                            })}
-                          </div>
-                        </div>
-                        <div style={{ position:"relative", paddingLeft:52 }}>
-                          <div style={{ position:"absolute", top:0, bottom:0, left:52, right:0, pointerEvents:"none" }}>
-                            {ticks.map(m => { const pct=((m-rangeStart)/totalRange)*100; return <div key={m} style={{ position:"absolute", left:`${pct}%`, top:0, bottom:0, width:1, background:"#334155" }} />; })}
-                          </div>
-                          {managerSchedules.map(({ driver, schedule }) => {
-                            const has = !!schedule;
-                            const pct = has?((toMinutes(schedule.time)-rangeStart)/totalRange)*100:null;
-                            const isConf = schedule?.status==="confirmed";
-                            return (
-                              <div key={driver.id} style={{ display:"flex", alignItems:"center", marginBottom:8 }}>
-                                <div style={{ width:48, flexShrink:0, fontSize:12, fontWeight:700, color: has?"#e2e8f0":"#334155", textAlign:"right", paddingRight:10, marginLeft:-52 }}>{driver.name}</div>
-                                <div style={{ flex:1, height:32, position:"relative", background:"#0f172a", borderRadius:8, overflow:"hidden" }}>
-                                  {has && (<>
-                                    <div style={{ position:"absolute", left:`${pct}%`, top:"50%", transform:"translate(-50%,-50%)", width:28, height:28, borderRadius:8, background: isConf?"linear-gradient(135deg,#059669,#34d399)":"linear-gradient(135deg,#d97706,#fbbf24)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:10, fontWeight:900, color:"#fff", boxShadow: isConf?"0 0 10px rgba(52,211,153,0.5)":"0 0 10px rgba(251,191,36,0.5)", zIndex:2 }}>
-                                      {schedule.time.split(":")[1]==="00"?`${schedule.time.split(":")[0]}시`:schedule.time}
-                                    </div>
-                                    <div style={{ position:"absolute", left:0, top:"50%", transform:"translateY(-50%)", width:`${pct}%`, height:3, background: isConf?"linear-gradient(90deg,transparent,#34d39940)":"linear-gradient(90deg,transparent,#fbbf2440)" }} />
-                                  </>)}
-                                  {!has && <div style={{ position:"absolute", inset:0, display:"flex", alignItems:"center", paddingLeft:10 }}><div style={{ height:1, flex:1, borderTop:"1px dashed #334155" }} /></div>}
-                                </div>
+                        <div style={{ overflowX:"auto" }}>
+                          <div style={{ minWidth:360 }}>
+                            {/* 시간 축 */}
+                            <div style={{ position:"relative", marginBottom:8, paddingLeft:52 }}>
+                              <div style={{ position:"relative", height:20 }}>
+                                {ticks.map(m => {
+                                  const pct=((m-rangeStart)/totalRange)*100;
+                                  return <div key={m} style={{ position:"absolute", left:`${pct}%`, transform:"translateX(-50%)", fontSize:11, color:"#475569", fontWeight:600 }}>{Math.floor(m/60)}시</div>;
+                                })}
                               </div>
-                            );
-                          })}
+                            </div>
+                            {/* 기사 행 */}
+                            <div style={{ position:"relative", paddingLeft:52 }}>
+                              <div style={{ position:"absolute", top:0, bottom:0, left:52, right:0, pointerEvents:"none" }}>
+                                {ticks.map(m => { const pct=((m-rangeStart)/totalRange)*100; return <div key={m} style={{ position:"absolute", left:`${pct}%`, top:0, bottom:0, width:1, background:"#334155" }} />; })}
+                              </div>
+                              {managerSchedules.map(({ driver, schedule }) => {
+                                const has = !!schedule;
+                                const pct = has?((toMinutes(schedule.time)-rangeStart)/totalRange)*100:null;
+                                const isConf = schedule?.status==="confirmed";
+                                return (
+                                  <div key={driver.id} style={{ display:"flex", alignItems:"center", marginBottom:8 }}>
+                                    <div style={{ width:48, flexShrink:0, fontSize:12, fontWeight:700, color: has?"#e2e8f0":"#334155", textAlign:"right", paddingRight:10, marginLeft:-52 }}>{driver.name}</div>
+                                    <div style={{ flex:1, height:32, position:"relative", background:"#0f172a", borderRadius:8, overflow:"hidden" }}>
+                                      {has && (<>
+                                        <div style={{ position:"absolute", left:`${pct}%`, top:"50%", transform:"translate(-50%,-50%)", width:28, height:28, borderRadius:8, background: isConf?"linear-gradient(135deg,#059669,#34d399)":"linear-gradient(135deg,#d97706,#fbbf24)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:10, fontWeight:900, color:"#fff", boxShadow: isConf?"0 0 10px rgba(52,211,153,0.5)":"0 0 10px rgba(251,191,36,0.5)", zIndex:2 }}>
+                                          {schedule.time.split(":")[1]==="00"?`${schedule.time.split(":")[0]}시`:schedule.time}
+                                        </div>
+                                        <div style={{ position:"absolute", left:0, top:"50%", transform:"translateY(-50%)", width:`${pct}%`, height:3, background: isConf?"linear-gradient(90deg,transparent,#34d39940)":"linear-gradient(90deg,transparent,#fbbf2440)" }} />
+                                      </>)}
+                                      {!has && <div style={{ position:"absolute", inset:0, display:"flex", alignItems:"center", paddingLeft:10 }}><div style={{ height:1, flex:1, borderTop:"1px dashed #334155" }} /></div>}
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
                         </div>
                       </div>
                       <div style={{ background:"#1e293b", borderRadius:16, padding:20 }}>
