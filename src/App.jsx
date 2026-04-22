@@ -461,10 +461,10 @@ export default function App() {
                                 return (
                                   <div key={driver.id} style={{ display:"flex", alignItems:"center", marginBottom:8 }}>
                                     <div style={{ width:48, flexShrink:0, fontSize:12, fontWeight:700, color: has?"#e2e8f0":"#334155", textAlign:"right", paddingRight:10, marginLeft:-52 }}>{driver.name}</div>
-                                    <div style={{ flex:1, height:32, position:"relative", background:"#0f172a", borderRadius:8, overflow:"hidden" }}>
+                                    <div style={{ flex:1, height:36, position:"relative", background:"#0f172a", borderRadius:8, overflow:"visible" }}>
                                       {has && (<>
-                                        <div style={{ position:"absolute", left:`${pct}%`, top:"50%", transform:"translate(-50%,-50%)", width:28, height:28, borderRadius:8, background: isConf?"linear-gradient(135deg,#059669,#34d399)":"linear-gradient(135deg,#d97706,#fbbf24)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:10, fontWeight:900, color:"#fff", boxShadow: isConf?"0 0 10px rgba(52,211,153,0.5)":"0 0 10px rgba(251,191,36,0.5)", zIndex:2 }}>
-                                          {schedule.time.split(":")[1]==="00"?`${schedule.time.split(":")[0]}시`:schedule.time}
+                                        <div style={{ position:"absolute", left:`${pct}%`, top:"50%", transform:"translate(-50%,-50%)", minWidth:36, height:28, borderRadius:8, padding:"0 6px", background: isConf?"linear-gradient(135deg,#059669,#34d399)":"linear-gradient(135deg,#d97706,#fbbf24)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:11, fontWeight:900, color:"#fff", boxShadow: isConf?"0 0 10px rgba(52,211,153,0.5)":"0 0 10px rgba(251,191,36,0.5)", zIndex:2, whiteSpace:"nowrap" }}>
+                                          {schedule.time}
                                         </div>
                                         <div style={{ position:"absolute", left:0, top:"50%", transform:"translateY(-50%)", width:`${pct}%`, height:3, background: isConf?"linear-gradient(90deg,transparent,#34d39940)":"linear-gradient(90deg,transparent,#fbbf2440)" }} />
                                       </>)}
